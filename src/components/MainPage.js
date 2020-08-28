@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect , useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import Login from '../components/Login'
@@ -7,24 +7,34 @@ import InputBox from './InputBox'
 import Axios from 'axios';
 import CardItem from './CardItem'
 import { Layout, Menu } from 'antd';
-// import {
-//   AppstoreOutlined,
-//   BarChartOutlined,
-//   CloudOutlined,
-//   ShopOutlined,
-//   TeamOutlined,
-//   UserOutlined,
-//   UploadOutlined,
-//   VideoCameraOutlined,
-// } from '@ant-design/icons';
+import Headers from '../components/headerFrom/headerFrom'
+import { Card , Col , Row} from 'antd';
+const { Meta } = Card;
 
 const MainPage = () => {
 
-  const { Header, Content, Footer, Sider } = Layout;
+  const [Videos, setVideos] = useState([])
+  // const [thumbName, setthumbName] = useState([])
+  const { Content, Footer, Sider } = Layout;
+
+  useEffect(() => {
+    console.log("안녕")
+    Axios.get('/uploadpage/getVideos')
+        .then(res => {
+            if (res.data.success) {
+                console.log(res.data)
+                setVideos(res.data.video)
+              } else {
+                alert('Failed to get Videos')
+            }
+        })
+}, [])
+
 
     return(
       <>
-  <Layout>
+{console.log("dd" + Videos.filepath)}      
+  {/* <Layout>
     <Sider
       style={{
         overflow: 'auto',
@@ -44,29 +54,28 @@ const MainPage = () => {
         <Menu.Item key="3" >
           nav 3
         </Menu.Item>
-  
       </Menu>
     </Sider>
-    <Layout className="site-layout" style={{ marginLeft: 200 }}>
-    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} >
-        <Menu.Item key="1" style={{marginLeft: "25%"}}><InputBox/></Menu.Item>
-        <Menu.Item key="2" style ={{marginLeft : "35%"}}><a href="/login">로그인</a></Menu.Item>
-        {/* <Menu.Item key="3">logout</Menu.Item> */}
-      </Menu>
-      <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-        <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
-          <CardItem/>
-  
-        </div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2020 Created by Ant UED</Footer>
+    </Layout>   */}
+
+    <Layout className="site-layout" >
+    <Headers/>
+
+       <Row gutter={16} style={{ marginLeft: 100 }}>
+       <CardItem data = {Videos}/>
+       </Row>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+       <br/> 
+      <Footer style={{ textAlign: 'center' }}>..........video upload.......... </Footer>
     </Layout>
-  </Layout>  
-
-
 </>
   )
 }
 
 export default MainPage
-

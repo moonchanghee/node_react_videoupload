@@ -10,20 +10,18 @@ import {createStore} from 'redux';
 import MainPage from './components/MainPage'
 import Login from './components/Login'
 import Register from './components/Register'
+import VideoDetailPage from './components/VideoDetailPage/VideoDetailPage'
+import VideoUploadPage from './components/VideoUploadPage/VideoUploadPage'
+
+
 
 const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <Provider store = {store}>
-     {/* <App /> */}
-   {/* <MainPage/> */}
-<BrowserRouter>
-<Switch>
-<Route  path ="/register" component ={Register} />
-  <Route  path ="/login" component ={Login} />
-  <Route  exact path ="/" component ={MainPage} />
-</Switch>
-</BrowserRouter>,
+ <BrowserRouter>
+            <App />
+        </BrowserRouter>,
 </Provider>,
 document.getElementById('root')
 );

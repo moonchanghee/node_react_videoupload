@@ -1,6 +1,5 @@
 import Axios from 'axios';
-import {LOGIN_USERS} from './types'
-
+import {LOGIN_USERS , REGISER_USERS} from './types'
 // const LOGIN_USER = "User_arcions/LOGIN_USERS"
 
 export function loginUser(data){
@@ -12,3 +11,16 @@ export function loginUser(data){
     type: LOGIN_USERS,
     payload : request
 }}
+
+
+
+export function registerUsers(submitdata){
+    const request = Axios.post('/register' ,submitdata )
+    .then(res => {return res.data})                               
+    //  console.log(request)
+
+     return {            
+     type: REGISER_USERS,
+     payload : "request"
+    
+ }}

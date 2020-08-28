@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import {useDispatch ,connect } from 'react-redux';
-import {registerUsers} from '../actions/RegisterUser'
+import {registerUsers} from '../actions/User_actions'
 
 
 const Register = () => {
@@ -34,6 +34,14 @@ const onSubmitHandler = (e) => {
     }
 
     dispatch(registerUsers(body))
+    // .then(res => {
+    //     if(res.payload.success){
+    //         console.log("가입성공")
+    //     }
+    //     else{
+    //         alert("실패")
+    //     }
+    // })
 
 }
 
