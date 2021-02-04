@@ -8,6 +8,8 @@ const multer = require("multer") //multer이용 파일 저장
 //ffmpeg , multer 설치
 
 
+
+
 let storage = multer.diskStorage({
     //저장경로
    destination:(req,file,cb) => {
@@ -42,11 +44,7 @@ if(err){
 // console.log("비디오 업로드" + res.req.file.filename)
 return res.json({success: true , url : res.req.file.path, fileName: res.req.file.filename })  //파일을 저장한 경로를 보내준다 
 })
-
 })
-
-
-
 
 
 
@@ -55,7 +53,7 @@ router.post('/thumbnail', (req, res, next) => {
 console.log("썸네일 포스트 라우터")
 let fileDuration ="";
 let filepath = ""
-
+console.log(req.body.url)
 ffmpeg.ffprobe(req.body.url , (err , metadata) =>{
 console.log("metadata :" + metadata.format.duration) //해당 비디오 정보
 fileDuration = metadata.format.duration //동영상 길이 대입
@@ -70,10 +68,8 @@ filepath = fileName[0];
 .on("end" , function() { 
 console.log("Screenshots taken");
 return res.json({
-    success:true,
-    fileName:filepath,
-    fileDuration: fileDuration
-})})
+    success:true, fileName:filepath, fileDuration:fileDuration})
+})
 .screenshots({
     count :3,
     folder: 'public/thumbnails',
@@ -107,7 +103,7 @@ console.log(req.body)
 });
 
 
-router.get("/getVideos", (req, res) => {
+router.get("/getVideos", (req, res ,next) => {
 
     Video.find()
     .exec((err, video) => {
@@ -128,17 +124,6 @@ console.log("getVideoDetail")
         res.status(200).json({ success: true, video })
     })
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 

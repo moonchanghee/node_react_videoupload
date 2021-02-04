@@ -15,12 +15,21 @@ export function loginUser(data){
 
 
 export function registerUsers(submitdata){
-    const request = Axios.post('/register' ,submitdata )
+    const request = Axios.post('/users/register' ,submitdata )
     .then(res => {return res.data})                               
     //  console.log(request)
 
      return {            
      type: REGISER_USERS,
-     payload : "request"
+     payload : request
     
  }}
+
+//  export function Login(submit){
+//      const request = Axios.get('/users/register' ,submit )
+//      .then(res => {return res.data})
+//      return {            
+//         type: REGISER_USERS,
+//         payload : request     
+//  }
+// }

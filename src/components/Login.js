@@ -8,8 +8,7 @@ import { bindActionCreators } from 'redux';
 
 const Login = () => {
 
-    const dispatch = useDispatch();
-
+const dispatch = useDispatch();
 const [Id , setId] = useState("")
 const [Password , setPassword] = useState("")
 

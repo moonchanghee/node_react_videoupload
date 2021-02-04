@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import Axios from 'axios';
-import { Menu , Layout} from 'antd';
+import { Menu , Layout } from 'antd';
 
-const SideVideo = () =>{
+const SideVideo = (name) =>{
 
     const [SideVideos, setSideVideos] = useState([])
 
@@ -19,11 +19,12 @@ const SideVideo = () =>{
     }, [])
 
 
-
+console.log(name)
 
     const sideVideoItem = SideVideos.map(( video, index) => {
+console.log(video.fileName)
 
-
+if(video.fileName !== name.name){
        return( 
         <>
         <Layout >  
@@ -37,7 +38,7 @@ const SideVideo = () =>{
 
         <div style={{ width:'50%' }}>
             <a href={`/video/${video._id}`} style={{ color:'gray' }}>
-                <span style={{ fontSize: '1rem', color: 'black' }}>{video.title}</span><br />
+                <span style={{ fontSize: '1rem', color: 'black' }}>타이틀 : {video.title}</span><br />
             </a>
         </div>
     </div>
@@ -46,7 +47,9 @@ const SideVideo = () =>{
     </Layout>
     <br/>
     </>
-    )})
+    )
+       }
+})
 
 
 

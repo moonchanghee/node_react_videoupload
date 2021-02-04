@@ -19,17 +19,18 @@ const MainPage = () => {
 
   useEffect(() => {
     console.log("안녕")
-    Axios.get('/uploadpage/getVideos')
+    Axios.get('/getVideos')
         .then(res => {
             if (res.data.success) {
-                console.log(res.data)
+                console.log(res.data.video)
                 setVideos(res.data.video)
+ 
               } else {
                 alert('Failed to get Videos')
             }
         })
 }, [])
-
+console.log(Videos)
 
     return(
       <>

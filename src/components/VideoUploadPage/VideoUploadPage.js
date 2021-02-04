@@ -38,15 +38,13 @@ Axios.post('/uploadpage/videoupload' , formData , config )
         console.log(res.data)
         console.log("비디오 업로드 성공")
         
-
         let variable = {
             url:res.data.url,
             fileName: res.data.fileName
         }
-console.log(variable)
         setFilePath(res.data.url) //동영상주소
         setFileName(res.data.fileName)
-        Axios.post('/uploadpage/thumbnail' , variable )
+        Axios.post('/thumbnail',variable)
         .then(res => {
             if(res.data.success){
                 console.log("썸네일 생성 성공")
@@ -80,7 +78,7 @@ const onSubmit = (e) =>{
         thumbName : thumbName 
     }
 
-    Axios.post('/uploadpage/uploadVideo',variables )
+    Axios.post('/uploadVideo',variables )
     .then(res => {
         if(res.data.success){
             console.log("성공")
@@ -104,39 +102,34 @@ return(
 <Title level = {2}>Upload Video</Title>
 </div>
 <Form onSubmit= {onSubmit}>
-<div style= {{display:'flex' , justifyContent:'space-between'}}>
+<div style= {{display:'flex' ,float : 'right' ,justifyContent:'space-between',marginRight:"130px" }}>
+<img style={{ width: '80%' , height: "80%" , marginLeft : "10%"}} 
+alt="썸네일" src={`../thumbnails/${thumbName}` }/>
+</div>
 <Dropzone
 onDrop ={onDrop}
 multiple = {false} //한번에 파일 몇개를 업로드할것인지
 maxSize = {10000000}
 >
 {({getRootProps, getInputProps}) => (
-        <section>
+        <section style ={{ width : "300px"}}>
         <div style ={{width:'300px' , height: '240px' ,border :'1px solid lightgray',
         alignItems:'center' , justifyContent:'center'}} {...getRootProps()}>
             <input {...getInputProps()}/>
             <PlusOutlined style ={{fontSize:"50px" , marginTop: "30%" , marginLeft:"40%"} }/>
         </div>
         </section>
-)
-}
+)}
 </Dropzone>
-{/* <img src={`../thumbnails${thumbName}`}/>  */}
-<div>
-<img style={{ width: '80%' , height: "80%" , marginLeft : "10%"}} 
-alt="thumbnail" src={`../thumbnails/${thumbName}` }/>
-{/* `/video/${video._id}`}  */}
-</div>
-</div>
-
-
 <label>Title</label>
 <Input
 onChange ={Title_onChange}
 value ={Titlecontent}
 />
+
 <br/>
 <br/>
+
 <label>Description</label>
 <TextArea
 onChange ={Description_onChange}
