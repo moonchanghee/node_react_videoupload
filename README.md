@@ -1,6 +1,5 @@
 ## Introduction
 react.js , node.js , mongoDB 를 활용한 영상 업로드 개인 프로젝트 입니다.
----
 
 <img src ="https://user-images.githubusercontent.com/56143212/106844255-656e3080-66eb-11eb-9d6e-334c39c06702.PNG"  width = "600" height = "400"></img>
 </br>
